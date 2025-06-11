@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+escolha=$(echo -e "PowerOff\nReboot\nLogout" | rofi -dmenu -no-fixed-num-lines -theme-str 'window {width: 25%; location: northeast; y-offset: 24;} mainbox{children: [listview];}')
+
+if [[ "$escolha" == "PowerOff" ]]; then
+	systemctl poweroff
+elif [[ "$escolha" == "Reboot" ]]; then
+	systemctl reboot
+elif [[ "$escolha" == "Logout" ]]; then
+	i3-msg exit
+fi

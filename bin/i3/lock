@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [[ -e $HOME/.config/i3/background.png ]]; then
+	rm -rf $HOME/.config/i3/background.png
+fi
+
+scrot $HOME/.config/i3/screen.png
+convert $HOME/.config/i3/screen.png -resize 1368x768^ -gravity center -blur 8x8 $HOME/.config/i3/background.png
+
+rm -rf $HOME/.config/i3/screen.png
+
+i3lock -n -i $HOME/.config/i3/background.png

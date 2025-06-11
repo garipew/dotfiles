@@ -8,3 +8,6 @@ ln -sf $PWD/tmux.conf $HOME/.config/tmux/tmux.conf
 
 echo "$PWD/i3.conf -> $HOME/.config/i3/config"
 ln -sf $PWD/i3.conf $HOME/.config/i3/config
+
+echo "$PWD/bin/i3 -> $HOME/.config/i3/bin"
+ln -sf $PWD/bin/i3 $HOME/.config/i3/bin
