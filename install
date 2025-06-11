@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo "$PWD/vimrc -> $HOME/.vimrc" 
+ln -sf $PWD/vimrc $HOME/.vimrc
+
+echo "$PWD/tmux.conf -> $HOME/.config/tmux/tmux.conf"
+ln -sf $PWD/tmux.conf $HOME/.config/tmux/tmux.conf
