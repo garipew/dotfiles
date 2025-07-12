@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 
+apt install vim i3 tmux git feh rofi dnust dmenu kitty firefox
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+git clone https://github.com/dylanaraps/pywal
+
 echo "$PWD/vimrc -> $HOME/.vimrc" 
 ln -sf $PWD/vimrc $HOME/.vimrc
 
 echo "$PWD/tmux.conf -> $HOME/.config/tmux/tmux.conf"
+mkdir -p $HOME/.config/tmux
 ln -sf $PWD/tmux.conf $HOME/.config/tmux/tmux.conf
 
 echo "$PWD/i3.conf -> $HOME/.config/i3/config"
+mkdir -p $HOME/.config/i3
 ln -sf $PWD/i3.conf $HOME/.config/i3/config
 
 echo "$PWD/bin/i3 -> $HOME/.config/i3/bin"
