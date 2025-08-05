@@ -17,3 +17,10 @@ ln -sf $PWD/i3.conf $HOME/.config/i3/config
 
 echo "$PWD/bin/i3 -> $HOME/.config/i3/bin"
 ln -sf $PWD/bin/i3 $HOME/.config/i3/bin
+
+echo "$PWD/polybar.conf -> $HOME/.config/polybar/config.ini"
+mkdir -p $HOME/.config/polybar
+ln -sf $PWD/polybar.conf $HOME/.config/polybar/config.ini
+
+echo "$PWD/bin/i3/launchbar -> $HOME/.config/polybar/launch"
+ln -sf $PWD/bin/i3/launchbar $HOME/.config/polybar/launch
