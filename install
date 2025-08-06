@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-apt install vim i3 tmux git feh rofi dnust dmenu kitty firefox
+sudo apt-get install vim i3 tmux git feh rofi dnust dmenu kitty firefox-esr pipx
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-git clone https://github.com/dylanaraps/pywal
+pipx install pywal
 
 echo "$PWD/vimrc -> $HOME/.vimrc" 
 ln -sf $PWD/vimrc $HOME/.vimrc
