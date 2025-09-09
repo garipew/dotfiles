@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+audio_playing() {
+	pactl list sink-inputs | grep -q 'application.name'
+}
+
+if audio_playing; then
+	xset s off -dpms
+	exit 0
+else
+	xset s on +dpms
+fi
+
 if [[ -e $HOME/.config/i3/background.png ]]; then
 	rm -rf $HOME/.config/i3/background.png
 fi
