@@ -17,6 +17,11 @@ set relativenumber
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 
+" Buffer stuff, may be useful later
+nnoremap <M-l> :bn<CR>
+nnoremap <M-h> :bp<CR>
+nnoremap <M-b> :<C-u>execute v:count1 . 'buffer'<CR>
+
 " Man page on tmux pane!!!
 nnoremap K :call TmuxMan()<CR>
 function! TmuxMan() 
