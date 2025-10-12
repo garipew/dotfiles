@@ -23,7 +23,7 @@ for f in configs/*; do
 		echo "ln -sf '$PWD/$f' '$HOME/.$base'"
 		ln -sf "$PWD/$f" "$HOME/.$base"
 	else
-		if [[ -d "$dest" ]] && [[ ! -h "$dest" ]]; then
+		if [[ -d "$dest" ]]; then
 			echo "rm -rf '$dest'"
 			rm -rf "$dest"
 		fi
