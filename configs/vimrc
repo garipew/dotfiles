@@ -4,6 +4,7 @@ call plug#end()
 
 colorscheme wal
 
+let g:OmiSharp_server_stdio = 1
 syntax enable 
 
 " incremental search ftw

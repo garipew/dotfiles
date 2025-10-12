@@ -1,26 +1,33 @@
 #!/usr/bin/env bash
 
-sudo apt-get install vim i3 tmux git feh rofi dnust dmenu kitty firefox-esr pipx
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-pipx install pywal
+sudo apt-get install neovim i3 tmux git feh rofi dnust dmenu kitty firefox-esr pipx
+if [[ ! -e ~/.vim/autoload/plug.vim ]]; then
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
 
-echo "$PWD/vimrc -> $HOME/.vimrc" 
-ln -sf $PWD/vimrc $HOME/.vimrc
+if ! pipx list | grep -q 'pywal'; then
+	pipx install 'pywal16'
+fi
 
-echo "$PWD/tmux.conf -> $HOME/.config/tmux/tmux.conf"
-mkdir -p $HOME/.config/tmux
-ln -sf $PWD/tmux.conf $HOME/.config/tmux/tmux.conf
+if [[ ! -v XDG_CONFIG_HOME ]]; then
+	XDG_CONFIG_HOME="$HOME/.config"
+fi
 
-echo "$PWD/i3.conf -> $HOME/.config/i3/config"
-mkdir -p $HOME/.config/i3
-ln -sf $PWD/i3.conf $HOME/.config/i3/config
+echo "ln -sf $PWD/configs/polybar/launch $PWD/configs/i3/bin/launchbar"
+ln -sf "$PWD/configs/polybar/launch" "$PWD/configs/i3/bin/launchbar"
 
-echo "$PWD/bin/i3 -> $HOME/.config/i3/bin"
-ln -sf $PWD/bin/i3 $HOME/.config/i3/bin
-
-echo "$PWD/polybar.conf -> $HOME/.config/polybar/config.ini"
-mkdir -p $HOME/.config/polybar
-ln -sf $PWD/polybar.conf $HOME/.config/polybar/config.ini
-
-echo "$PWD/bin/i3/launchbar -> $HOME/.config/polybar/launch"
-ln -sf $PWD/bin/i3/launchbar $HOME/.config/polybar/launch
+for f in configs/*; do
+	base=$(basename "$f")
+	dest="$XDG_CONFIG_HOME/$base"
+	if [[ "$base" == "vimrc" ]]; then
+		echo "ln -sf '$PWD/$f' '$HOME/.$base'"
+		ln -sf "$PWD/$f" "$HOME/.$base"
+	else
+		if [[ -d "$dest" ]] && [[ ! -h "$dest" ]]; then
+			echo "rm -rf '$dest'"
+			rm -rf "$dest"
+		fi
+		echo "ln -sf '$PWD/$f' '$dest'"
+		ln -sf "$PWD/$f" "$dest"
+	fi
+done
