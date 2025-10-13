@@ -50,3 +50,25 @@ vim.api.nvim_create_autocmd('FileType', {
 		})
 	end,
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'cs',
+	callback = function(ev)
+		vim.lsp.start({
+			name = 'omnisharp',
+			cmd = {'OmniSharp', '--languageserver', '--host-pid', tostring(vim.fn.getpid())},
+			root_dir = vim.fs.root(ev.buf, {'.git', '*.sln', '*.csproj'}),
+		})
+	end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'python',
+	callback = function(ev)
+		vim.lsp.start({
+			name = 'zuban',
+			cmd = {'zuban', 'server'},
+			root_dir = vim.fs.root(ev.buf, {'.git'}),
+		})
+	end,
+})
