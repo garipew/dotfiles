@@ -34,6 +34,19 @@ vim.keymap.set('n', 'K', function()
 	if os.getenv("TMUX") ~= nil then
 		vim.fn.system("tmux split-window -h 'man " .. word .. "'")
 	else
-		vim.cmd("!man " .. word)	
+		vim.cmd("!man " .. word)
 	end
 end)
+
+
+-- LSP stuff
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'lua',
+	callback = function(ev)
+		vim.lsp.start({
+			name = 'luals',
+			cmd = {'lua-language-server'},
+			root_dir = vim.fs.root(ev.buf, {'.git'}),
+		})
+	end,
+})
