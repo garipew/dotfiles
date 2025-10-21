@@ -24,9 +24,10 @@ vim.opt.incsearch = true
 vim.keymap.set('n', '<C-d>', '<C-d>zz', {noremap=true, silent=true})
 vim.keymap.set('n', '<C-u>', '<C-u>zz', {noremap=true, silent=true})
 
--- Buffer stuff, may be useful later
+-- Buffer stuff
 vim.keymap.set('n', '<M-l>', ':bn<CR>', {noremap=true, silent=true})
 vim.keymap.set('n', '<M-h>', ':bp<CR>', {noremap=true, silent=true})
+vim.keymap.set('n', '<M-c>', ':bd<CR>', {noremap=true, silent=true})
 
 -- Man page on tmux pane!!!
 vim.keymap.set('n', 'K', function()
@@ -68,6 +69,17 @@ vim.api.nvim_create_autocmd('FileType', {
 		vim.lsp.start({
 			name = 'zuban',
 			cmd = {'zuban', 'server'},
+			root_dir = vim.fs.root(ev.buf, {'.git'}),
+		})
+	end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'c',
+	callback = function(ev)
+		vim.lsp.start({
+			name = 'ccls',
+			cmd = {'ccls', '-v=2'},
 			root_dir = vim.fs.root(ev.buf, {'.git'}),
 		})
 	end,
