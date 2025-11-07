@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 sudo apt-get install neovim i3 tmux git feh rofi dnust dmenu kitty firefox-esr pipx
-if [[ ! -e "~/.vim/autoload/plug.vim" ]]; then
-	curl -fLo "~/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if [[ ! -e "$HOME/.vim/autoload/plug.vim" ]]; then
+	curl --create-dirs -fLo "$HOME/.vim/autoload/plug.vim" https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim  
 fi
 
-if [[ ! -e "~/.local/share/nvim/site/autoload/plug.vim" ]]; then
-	mkdir -p "~/.local/share/nvim/site/autoload" 
-	ln -sf "~/.vim/autoload/plug.vim" "~/.local/share/nvim/site/autoload/plug.vim"
+if [[ ! -e "$HOME/.local/share/nvim/site/autoload/plug.vim" ]]; then
+	mkdir -p "$HOME/.local/share/nvim/site/autoload" 
+	ln -sf "$HOME/.vim/autoload/plug.vim" "$HOME/.local/share/nvim/site/autoload/plug.vim"
 fi
 
 if ! pipx list | grep -q 'pywal'; then
@@ -24,7 +24,7 @@ ln -sf "$PWD/configs/polybar/launch" "$PWD/configs/i3/bin/launchbar"
 for f in configs/*; do
 	base=$(basename "$f")
 	dest="$XDG_CONFIG_HOME/$base"
-	if [[ "$base" == "vimrc" ]]; then
+	if [[ "$base" == "vimrc" ]] || [[ "$base" == "tmux.conf" ]]; then
 		echo "ln -sf '$PWD/$f' '$HOME/.$base'"
 		ln -sf "$PWD/$f" "$HOME/.$base"
 	else
