@@ -29,6 +29,11 @@ vim.keymap.set('n', '<M-l>', ':bn<CR>', {noremap=true, silent=true})
 vim.keymap.set('n', '<M-h>', ':bp<CR>', {noremap=true, silent=true})
 vim.keymap.set('n', '<M-c>', ':bd<CR>', {noremap=true, silent=true})
 
+vim.keymap.set('n', '<C-h>', '<C-w>h', {noremap=true, silent=true})
+vim.keymap.set('n', '<C-j>', '<C-w>j', {noremap=true, silent=true})
+vim.keymap.set('n', '<C-k>', '<C-w>k', {noremap=true, silent=true})
+vim.keymap.set('n', '<C-l>', '<C-w>l', {noremap=true, silent=true})
+
 -- Man page on tmux pane!!!
 vim.keymap.set('n', 'K', function()
 	local word = vim.fn.expand('<cword>')
@@ -75,7 +80,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-	pattern = 'c',
+	pattern = {'c', 'h'},
 	callback = function(ev)
 		vim.lsp.start({
 			name = 'ccls',
